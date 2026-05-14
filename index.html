@@ -316,8 +316,8 @@ async function sendMsg(){
       else if(isLong)baseDelay=3*60*1000+Math.random()*8*60*1000;
       else baseDelay=2*60*1000+Math.random()*10*60*1000;
       r={reply,delay:Math.floor(baseDelay)};
-    }
-  }catch(e){console.log('OpenRouter failed:',e.message);}
+    } else { alert('OpenRouter response: '+JSON.stringify(aiData).slice(0,300)); }
+  }catch(e){alert('OpenRouter error: '+e.message);}
 
   if(r&&r.reply){
     const sendAt=Date.now()+(r.delay||60000);

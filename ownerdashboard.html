@@ -445,7 +445,8 @@ ${trainingText}`;
       const aiData=await aiRes.json();
       const raw=aiData.choices?.[0]?.message?.content;
       if(raw)reply=raw.replace(/^(sure!?|of course!?|absolutely!?|certainly!?|great!?|wow!?)\s*/gi,'').replace(/\bas an ai\b.*?[.!]/gi,'').replace(/\bi('m| am) (an? )?(ai|language model|chatbot|assistant)\b.*?[.!]/gi,'').replace(/\bi (can't|cannot) (actually )?/gi,"i don't ").trim();
-    }catch(e){console.log('OpenRouter failed:',e.message);}
+      else alert('OpenRouter response: '+JSON.stringify(aiData).slice(0,300));
+    }catch(e){alert('OpenRouter error: '+e.message);}
     const aiMsg={role:'assistant',content:reply};CLONE_MSGS.push(aiMsg);renderCloneBubble(aiMsg,true);
 
     // Auto-save clone chat insights as training notes
