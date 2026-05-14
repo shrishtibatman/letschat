@@ -151,7 +151,6 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
 // ══ ENDPOINTS ══
 const RAILWAY='https://letschat-production-65ab.up.railway.app';
 const CF='https://shrill-bird-59e1.shrishtibatman.workers.dev';
-const OPENROUTER_KEY='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';
 
 const DEFAULT_CONFIG={aiName:'Shrishti',welcomeMsg:"hey 💗",bio:"20yo girl, real, funny, caring. talks like a real person not AI.",bannerEmoji:'🌸',customImg:'',ownerPasswordHash:''};
 let CONFIG={...DEFAULT_CONFIG},CURRENT_USER=null,CHAT_MSGS=[],PENDING_CHECK_INTERVAL=null;
@@ -294,30 +293,18 @@ async function sendMsg(){
   const msgsEl=document.getElementById('chat-messages');
   renderBubble(userMsg,msgsEl,true);
 
-  // Queue AI reply with human delay — direct OpenRouter call
+  // Queue AI reply via CF Worker (key stored securely in CF env)
   let r=null;
   try{
     const sysPrompt=buildSystem();
-    const fullMsgs=[{role:'system',content:sysPrompt},...CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content}))];
-    const aiRes=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+    const aiRes=await fetch(CF+'/api/chat',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+OPENROUTER_KEY},
-      body:JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct',messages:fullMsgs,max_tokens:120,temperature:0.95})
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system:sysPrompt,messages:CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content})),userId:CURRENT_USER.id})
     });
-    const aiData=await aiRes.json();
-    const rawReply=aiData.choices?.[0]?.message?.content;
-    if(rawReply){
-      const reply=rawReply.replace(/^(sure!?|of course!?|absolutely!?|certainly!?|great!?|wow!?)\s*/gi,'').replace(/\bas an ai\b.*?[.!]/gi,'').replace(/\bi('m| am) (an? )?(ai|language model|chatbot|assistant)\b.*?[.!]/gi,'').replace(/\bi (can't|cannot) (actually )?/gi,"i don't ").trim();
-      const lastMsg=txt;const len=lastMsg.length;const isQ=lastMsg.includes('?');
-      const isBoring=len<10&&!isQ;const isLong=len>100;const isVeryEngaging=isQ&&len>30;
-      let baseDelay;
-      if(isBoring)baseDelay=8*60*1000+Math.random()*20*60*1000;
-      else if(isVeryEngaging)baseDelay=1*60*1000+Math.random()*4*60*1000;
-      else if(isLong)baseDelay=3*60*1000+Math.random()*8*60*1000;
-      else baseDelay=2*60*1000+Math.random()*10*60*1000;
-      r={reply,delay:Math.floor(baseDelay)};
-    } else { alert('OpenRouter response: '+JSON.stringify(aiData).slice(0,300)); }
-  }catch(e){alert('OpenRouter error: '+e.message);}
+    r=await aiRes.json();
+    if(r.error) alert('AI error: '+JSON.stringify(r));
+  }catch(e){alert('AI error: '+e.message);}
 
   if(r&&r.reply){
     const sendAt=Date.now()+(r.delay||60000);
