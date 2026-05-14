@@ -25,7 +25,9 @@ MongoClient.connect(MONGO_URI)
   })
   .catch(err => console.error('❌ MongoDB:', err));
 
-app.get('/', (req, res) => res.json({ status: 'her space API 💗' }));
+// Serve static HTML files
+app.use(express.static(__dirname));
+app.get('/api/status', (req, res) => res.json({ status: 'her space API 💗' }));
 
 // ════════════════════════════════════════
 // CONFIG
