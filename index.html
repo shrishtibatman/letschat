@@ -301,7 +301,7 @@ async function sendMsg(){
     const fullMsgs=[{role:'system',content:sysPrompt},...CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content}))];
     const aiRes=await fetch('https://openrouter.ai/api/v1/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+OPENROUTER_KEY,'HTTP-Referer':'https://herspace.app','X-Title':'her space'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+OPENROUTER_KEY},
       body:JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct',messages:fullMsgs,max_tokens:120,temperature:0.95})
     });
     const aiData=await aiRes.json();
