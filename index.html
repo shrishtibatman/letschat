@@ -3,133 +3,142 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>her space 💗</title>
+<title>shrishti 💗</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--rose:#f2687a;--rose-soft:#f9a8b4;--cream:#fff8f3;--blush:#fde8e8;--lilac:#e8d5f5;--lilac-mid:#c9a7e8;--plum:#9b5fbf;--warm-dark:#3a1a2e;--warm-mid:#6b3a52;--text-soft:#7a4a60;--white:#ffffff;--shadow:0 8px 32px rgba(155,95,191,0.13);--shadow-lg:0 20px 60px rgba(155,95,191,0.2)}
+:root{--rose:#f2687a;--rose-soft:#f9a8b4;--cream:#fff8f3;--blush:#fde8e8;--lilac:#e8d5f5;--lilac-mid:#c9a7e8;--plum:#9b5fbf;--warm-dark:#3a1a2e;--warm-mid:#6b3a52;--text-soft:#7a4a60;--white:#ffffff;--shadow:0 8px 32px rgba(155,95,191,0.13)}
 html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--warm-dark);overflow-x:hidden}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--blush)}::-webkit-scrollbar-thumb{background:var(--rose-soft);border-radius:10px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-14px) rotate(1deg)}}
-@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.18)}28%{transform:scale(1)}42%{transform:scale(1.1)}70%{transform:scale(1)}}
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(242,104,122,0.45)}50%{box-shadow:0 0 0 14px rgba(242,104,122,0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.15)}28%{transform:scale(1)}42%{transform:scale(1.08)}70%{transform:scale(1)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(242,104,122,0.4)}50%{box-shadow:0 0 0 12px rgba(242,104,122,0)}}
 @keyframes dots{0%,80%,100%{transform:scale(0);opacity:.3}40%{transform:scale(1);opacity:1}}
-@keyframes popIn{0%{opacity:0;transform:scale(0.82) translateY(10px)}65%{transform:scale(1.03)}100%{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes profilePop{0%{opacity:0;transform:scale(0.8) translateY(-10px)}80%{transform:scale(1.03)}100%{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+@keyframes popIn{0%{opacity:0;transform:scale(0.85) translateY(8px)}70%{transform:scale(1.02)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes profilePop{0%{opacity:0;transform:scale(0.8)}100%{opacity:1;transform:scale(1)}}
+@keyframes tickIn{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
 .float{animation:float 4s ease-in-out infinite}.heartbeat{animation:heartbeat 2.8s ease-in-out infinite}
 .page{display:none;min-height:100vh}.page.active{display:flex;flex-direction:column}
-.btn-primary{padding:15px 24px;border-radius:16px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;box-shadow:0 8px 24px rgba(242,104,122,0.32);transition:transform .2s,box-shadow .2s}
+.btn-primary{padding:14px 22px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;box-shadow:0 6px 20px rgba(242,104,122,0.3);transition:transform .2s}
 .btn-primary:hover{transform:translateY(-2px) scale(1.02)}.btn-primary:active{transform:scale(0.97)}
-.btn-ghost{padding:12px 20px;border-radius:14px;border:2px solid var(--lilac);background:transparent;color:var(--warm-mid);font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-ghost{padding:11px 18px;border-radius:13px;border:2px solid var(--lilac);background:transparent;color:var(--warm-mid);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
 .btn-ghost:hover{background:var(--blush);border-color:var(--rose-soft)}
-.inp{width:100%;padding:14px 18px;border-radius:14px;border:2px solid var(--lilac);outline:none;font-size:16px;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--warm-dark);transition:border-color .2s}
+.inp{width:100%;padding:13px 16px;border-radius:13px;border:2px solid var(--lilac);outline:none;font-size:15px;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--warm-dark);transition:border-color .2s}
 .inp:focus{border-color:var(--rose)}.inp::placeholder{color:var(--rose-soft)}
-.bubble-wrap{display:flex;margin-bottom:14px;animation:popIn .35s ease forwards}.bubble-wrap.mine{justify-content:flex-end}.bubble-wrap.theirs{justify-content:flex-start}
-.bubble-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:17px;margin-right:9px;flex-shrink:0;align-self:flex-end}
-.bubble{max-width:72%;padding:12px 18px;font-size:15px;line-height:1.6;font-weight:500}
-.bubble.mine{border-radius:22px 22px 6px 22px;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;box-shadow:0 4px 18px rgba(242,104,122,0.32)}
-.bubble.theirs{border-radius:22px 22px 22px 6px;background:var(--white);color:var(--warm-dark);box-shadow:var(--shadow);border:1px solid rgba(232,213,245,0.55)}
-.bubble-name{font-size:11px;color:var(--lilac-mid);font-weight:800;margin-bottom:4px;letter-spacing:.8px;text-transform:uppercase}
-.typing-dots{display:flex;gap:5px;align-items:center;padding:14px 18px}
-.typing-dots span{width:8px;height:8px;border-radius:50%;background:var(--rose-soft);animation:dots 1.2s ease-in-out infinite}
+.bubble-wrap{display:flex;margin-bottom:4px;animation:popIn .3s ease forwards}.bubble-wrap.mine{justify-content:flex-end}.bubble-wrap.theirs{justify-content:flex-start}
+.bubble-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:15px;margin-right:7px;flex-shrink:0;align-self:flex-end}
+.bubble{max-width:75%;padding:10px 15px;font-size:15px;line-height:1.55;font-weight:500;position:relative}
+.bubble.mine{border-radius:20px 20px 5px 20px;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff}
+.bubble.theirs{border-radius:20px 20px 20px 5px;background:var(--white);color:var(--warm-dark);box-shadow:var(--shadow);border:1px solid rgba(232,213,245,0.5)}
+.bubble-time{font-size:10px;opacity:.55;margin-top:3px;display:block;text-align:right}
+.audio-bubble{display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:20px 20px 20px 5px;background:var(--white);box-shadow:var(--shadow);border:1px solid rgba(232,213,245,0.5);max-width:75%}
+.audio-play-btn{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--plum));border:none;color:#fff;font-size:14px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.typing-dots{display:flex;gap:4px;align-items:center;padding:12px 16px}
+.typing-dots span{width:7px;height:7px;border-radius:50%;background:var(--rose-soft);animation:dots 1.2s ease-in-out infinite}
 .typing-dots span:nth-child(2){animation-delay:.2s}.typing-dots span:nth-child(3){animation-delay:.4s}
 .blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
-#custom-img-float{position:fixed;bottom:88px;left:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--plum));display:none;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(242,104,122,0.45);z-index:999;transition:transform .2s;overflow:hidden;border:3px solid rgba(255,255,255,0.85);cursor:pointer}
-#custom-img-float:hover{transform:scale(1.12)}#custom-img-float.visible{display:flex}
-#cif-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}#cif-icon{font-size:22px;color:#fff}
-#ig-profile-frame{display:none;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-radius:22px;padding:22px 20px 18px;margin-bottom:22px;border:1.5px solid rgba(232,213,245,0.7);box-shadow:0 10px 36px rgba(155,95,191,0.14);text-align:center;animation:profilePop .5s cubic-bezier(0.34,1.56,0.64,1) forwards}
-.ig-pic-ring{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#fcaf45,#f77737,#fd1d1d,#e1306c,#833ab4,#5851db);padding:3px;margin:0 auto 12px;box-shadow:0 4px 18px rgba(131,58,180,0.28)}
+#custom-img-float{position:fixed;bottom:84px;left:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--plum));display:none;align-items:center;justify-content:center;box-shadow:0 5px 20px rgba(242,104,122,0.4);z-index:999;overflow:hidden;border:3px solid rgba(255,255,255,0.85);cursor:pointer;transition:transform .2s}
+#custom-img-float:hover{transform:scale(1.1)}#custom-img-float.visible{display:flex}
+#cif-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}#cif-icon{font-size:20px;color:#fff}
+#ig-profile-frame{display:none;background:rgba(255,255,255,0.9);backdrop-filter:blur(14px);border-radius:20px;padding:20px 18px 16px;margin-bottom:18px;border:1.5px solid rgba(232,213,245,0.6);box-shadow:0 8px 28px rgba(155,95,191,0.12);text-align:center;animation:profilePop .4s ease forwards}
+.ig-pic-ring{width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,#fcaf45,#f77737,#fd1d1d,#e1306c,#833ab4);padding:3px;margin:0 auto 10px;box-shadow:0 4px 16px rgba(131,58,180,0.25)}
 .ig-pic-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--cream);display:flex;align-items:center;justify-content:center;border:3px solid #fff}
-#ig-pic{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}#ig-pic-fallback{font-size:34px}
-#ig-display-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--warm-dark);margin-bottom:2px}
-#ig-display-handle{font-size:13px;color:var(--text-soft);font-weight:600}
+#ig-pic{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}#ig-pic-fallback{font-size:30px}
+#ig-display-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--warm-dark);margin-bottom:2px}
+#ig-display-handle{font-size:12px;color:var(--text-soft);font-weight:600}
+
+/* pending reply indicator */
+#pending-indicator{display:none;padding:8px 16px;font-size:12px;color:var(--text-soft);font-weight:600;text-align:center;font-style:italic}
+
+/* warning banner */
+#warning-banner{display:none;padding:10px 16px;background:rgba(242,104,122,0.1);border-bottom:1px solid rgba(242,104,122,0.2);font-size:13px;color:var(--rose);font-weight:700;text-align:center}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div class="page active" id="page-login" style="align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(145deg,#fff0f5 0%,#fde8f0 30%,#ede0ff 70%,#fff5fb 100%);position:relative;overflow:hidden;padding:24px">
-  <div class="blob" style="width:420px;height:420px;top:-80px;left:-100px;background:radial-gradient(circle,rgba(242,104,122,0.13),transparent 70%)"></div>
-  <div class="blob" style="width:500px;height:500px;bottom:-100px;right:-120px;background:radial-gradient(circle,rgba(201,167,232,0.16),transparent 70%)"></div>
-  <div class="float" style="position:absolute;font-size:28px;opacity:.22;top:12%;left:6%">💗</div>
-  <div class="float" style="position:absolute;font-size:22px;opacity:.2;top:28%;right:8%;animation-delay:.5s">✨</div>
-  <div class="float" style="position:absolute;font-size:30px;opacity:.18;top:55%;left:4%;animation-delay:1s">🌸</div>
-  <div class="float" style="position:absolute;font-size:24px;opacity:.22;bottom:20%;right:6%;animation-delay:.8s">💫</div>
-  <div class="float" style="position:absolute;font-size:26px;opacity:.18;bottom:35%;left:12%;animation-delay:1.4s">🦋</div>
+  <div class="blob" style="width:400px;height:400px;top:-80px;left:-100px;background:radial-gradient(circle,rgba(242,104,122,0.12),transparent 70%)"></div>
+  <div class="blob" style="width:480px;height:480px;bottom:-100px;right:-120px;background:radial-gradient(circle,rgba(201,167,232,0.15),transparent 70%)"></div>
+  <div class="float" style="position:absolute;font-size:26px;opacity:.2;top:12%;left:6%">💗</div>
+  <div class="float" style="position:absolute;font-size:20px;opacity:.18;top:28%;right:8%;animation-delay:.5s">✨</div>
+  <div class="float" style="position:absolute;font-size:28px;opacity:.16;top:55%;left:4%;animation-delay:1s">🌸</div>
+  <div class="float" style="position:absolute;font-size:22px;opacity:.2;bottom:20%;right:6%;animation-delay:.8s">💫</div>
 
-  <div style="background:rgba(255,255,255,0.88);backdrop-filter:blur(28px);border-radius:32px;padding:48px 40px;max-width:440px;width:100%;box-shadow:0 28px 80px rgba(155,95,191,0.22),0 0 0 1px rgba(232,213,245,0.5);animation:fadeUp .8s ease;text-align:center;position:relative;z-index:1">
-    <div class="heartbeat" id="login-emoji" style="font-size:68px;margin-bottom:18px">🌸</div>
-    <h1 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--warm-dark);line-height:1.2;margin-bottom:10px">hey there 💗</h1>
-    <p id="login-welcome" style="color:var(--text-soft);font-size:17px;font-weight:500;margin-bottom:36px">so glad you're here, love 🌸</p>
+  <div style="background:rgba(255,255,255,0.88);backdrop-filter:blur(28px);border-radius:28px;padding:44px 36px;max-width:420px;width:100%;box-shadow:0 24px 70px rgba(155,95,191,0.2),0 0 0 1px rgba(232,213,245,0.5);animation:fadeUp .7s ease;text-align:center;position:relative;z-index:1">
+    <div class="heartbeat" id="login-emoji" style="font-size:62px;margin-bottom:16px">🌸</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--warm-dark);margin-bottom:8px">hey 💗</h1>
+    <p id="login-welcome" style="color:var(--text-soft);font-size:16px;font-weight:500;margin-bottom:32px">so glad you're here</p>
 
     <div id="login-step1">
-      <button class="btn-primary" onclick="showStep(2)" style="width:100%;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#e1306c,#833ab4,#fd1d1d);box-shadow:0 8px 24px rgba(131,58,180,0.38)">
-        <span style="font-size:22px">📸</span> Continue with Instagram
+      <button class="btn-primary" onclick="showStep(2)" style="width:100%;margin-bottom:11px;display:flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(135deg,#e1306c,#833ab4,#fd1d1d)">
+        <span style="font-size:20px">📸</span> Continue with Instagram
       </button>
-      <div style="color:var(--text-soft);font-size:13px;margin:10px 0">or</div>
-      <button class="btn-ghost" onclick="showStep(3)" style="width:100%">just enter my name 💌</button>
+      <div style="color:var(--text-soft);font-size:12px;margin:9px 0">or</div>
+      <button class="btn-ghost" onclick="showStep(3)" style="width:100%">just my name 💌</button>
     </div>
 
     <div id="login-step2" style="display:none">
-      <p style="color:var(--text-soft);font-size:14px;margin-bottom:12px">your instagram username 👇</p>
-      <input class="inp" id="ig-handle-input" placeholder="@yourhandle" style="text-align:center;margin-bottom:11px"/>
-      <input class="inp" type="password" id="ig-pw-input" placeholder="your password 🔒" style="text-align:center;margin-bottom:14px" onkeydown="if(event.key==='Enter')loginIG()"/>
-      <div id="ig-err" style="color:var(--rose);font-size:13px;font-weight:700;margin-bottom:10px;display:none">wrong password babe 😅</div>
-      <button class="btn-primary" onclick="loginIG()" style="width:100%;margin-bottom:10px;animation:pulseGlow 2s infinite">let's go 🚀</button>
-      <button onclick="showStep(1)" style="background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:14px;font-family:'Nunito',sans-serif">← back</button>
+      <input class="inp" id="ig-handle-input" placeholder="@yourhandle" style="text-align:center;margin-bottom:10px"/>
+      <input class="inp" type="password" id="ig-pw-input" placeholder="password 🔒" style="text-align:center;margin-bottom:13px" onkeydown="if(event.key==='Enter')loginIG()"/>
+      <div id="ig-err" style="color:var(--rose);font-size:13px;font-weight:700;margin-bottom:9px;display:none">wrong password 😅</div>
+      <button class="btn-primary" onclick="loginIG()" style="width:100%;margin-bottom:9px">let's go 🚀</button>
+      <button onclick="showStep(1)" style="background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:13px;font-family:'Nunito',sans-serif">← back</button>
     </div>
 
     <div id="login-step3" style="display:none">
-      <input class="inp" id="manual-name-input" placeholder="what's your name? 🌸" style="text-align:center;margin-bottom:14px" onkeydown="if(event.key==='Enter')loginManual()"/>
-      <button class="btn-primary" onclick="loginManual()" style="width:100%;margin-bottom:10px;animation:pulseGlow 2s infinite">let's go 🚀</button>
-      <button onclick="showStep(1)" style="background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:14px;font-family:'Nunito',sans-serif">← back</button>
+      <input class="inp" id="manual-name-input" placeholder="your name? 🌸" style="text-align:center;margin-bottom:13px" onkeydown="if(event.key==='Enter')loginManual()"/>
+      <button class="btn-primary" onclick="loginManual()" style="width:100%;margin-bottom:9px">let's go 🚀</button>
+      <button onclick="showStep(1)" style="background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:13px;font-family:'Nunito',sans-serif">← back</button>
     </div>
-    <div onclick="window.location.href='owner-dashboard.html'" style="margin-top:22px;opacity:0;cursor:default;font-size:8px;user-select:none">·</div>
+    <div onclick="window.location.href='owner-dashboard.html'" style="margin-top:20px;opacity:0;cursor:default;font-size:7px;user-select:none">·</div>
   </div>
 </div>
 
 <!-- CHAT -->
 <div class="page" id="page-chat" style="height:100vh;background:linear-gradient(160deg,#fff5fb 0%,#fde8f0 50%,#ede0ff 100%)">
-  <div id="chat-header" style="padding:14px 20px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.82);backdrop-filter:blur(24px);border-bottom:1px solid rgba(232,213,245,0.5);box-shadow:0 2px 20px rgba(155,95,191,0.08);flex-shrink:0">
-    <div class="heartbeat" id="chat-avatar" style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 14px rgba(242,104,122,0.3)">🌸</div>
+
+  <div id="warning-banner"></div>
+
+  <div style="padding:12px 18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.82);backdrop-filter:blur(22px);border-bottom:1px solid rgba(232,213,245,0.5);flex-shrink:0">
+    <div class="heartbeat" id="chat-avatar" style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 3px 12px rgba(242,104,122,0.28)">🌸</div>
     <div style="flex:1">
-      <div id="chat-ai-name" style="font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--warm-dark)">Sofi</div>
-      <div id="chat-status" style="font-size:13px;color:var(--text-soft);font-weight:500">💗 always here for you</div>
+      <div id="chat-ai-name" style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--warm-dark)">Shrishti</div>
+      <div id="chat-status" style="font-size:12px;color:var(--text-soft);font-weight:500">💗</div>
     </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <span id="chat-welcome-name" style="font-size:13px;color:var(--text-soft);font-weight:600"></span>
-      <button class="btn-ghost" onclick="logout()" style="padding:7px 14px;font-size:12px">leave</button>
-    </div>
+    <span id="chat-welcome-name" style="font-size:12px;color:var(--text-soft);font-weight:600"></span>
+    <button class="btn-ghost" onclick="logout()" style="padding:6px 12px;font-size:11px">leave</button>
   </div>
 
-  <div id="chat-messages" style="flex:1;overflow-y:auto;padding:22px 18px">
+  <div id="chat-messages" style="flex:1;overflow-y:auto;padding:18px 15px">
     <div id="ig-profile-frame">
       <div class="ig-pic-ring"><div class="ig-pic-inner">
         <img id="ig-pic" src="" alt=""/><div id="ig-pic-fallback">👤</div>
       </div></div>
       <div id="ig-display-name"></div><div id="ig-display-handle"></div>
     </div>
-    <div id="chat-empty" style="text-align:center;margin-top:40px;animation:fadeUp .8s ease">
-      <div style="font-size:60px;margin-bottom:16px">💗</div>
-      <p id="chat-empty-name" style="font-family:'Playfair Display',serif;font-size:26px;color:var(--warm-mid);margin-bottom:8px"></p>
-      <p id="chat-empty-msg" style="color:var(--text-soft);font-size:16px"></p>
+    <div id="chat-empty" style="text-align:center;margin-top:50px;animation:fadeUp .7s ease">
+      <div style="font-size:52px;margin-bottom:14px">💗</div>
+      <p id="chat-empty-name" style="font-family:'Playfair Display',serif;font-size:24px;color:var(--warm-mid);margin-bottom:7px"></p>
+      <p id="chat-empty-msg" style="color:var(--text-soft);font-size:15px"></p>
     </div>
   </div>
 
-  <div id="typing-indicator" style="display:none;padding:0 18px 8px;align-items:flex-end;gap:9px">
-    <div id="typing-avatar" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:16px">🌸</div>
-    <div style="background:var(--white);border-radius:22px 22px 22px 6px;box-shadow:var(--shadow);border:1px solid rgba(232,213,245,0.55)">
+  <div id="pending-indicator">she'll reply soon... 💗</div>
+
+  <div id="typing-indicator" style="display:none;padding:0 15px 6px;align-items:flex-end;gap:8px">
+    <div id="typing-avatar" style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:14px">🌸</div>
+    <div style="background:var(--white);border-radius:20px 20px 20px 4px;box-shadow:var(--shadow);border:1px solid rgba(232,213,245,0.5)">
       <div class="typing-dots"><span></span><span></span><span></span></div>
     </div>
   </div>
 
-  <div style="padding:14px 18px;background:rgba(255,255,255,0.88);backdrop-filter:blur(22px);border-top:1px solid rgba(232,213,245,0.4);flex-shrink:0">
-    <div style="display:flex;gap:12px;align-items:center">
-      <input class="inp" id="chat-input" placeholder="say something 💗" onkeydown="if(event.key==='Enter')sendMsg()" style="flex:1"/>
-      <button onclick="sendMsg()" style="width:50px;height:50px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;font-size:22px;cursor:pointer;box-shadow:0 6px 20px rgba(242,104,122,0.38);flex-shrink:0;transition:transform .15s" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">💌</button>
+  <div style="padding:12px 15px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);border-top:1px solid rgba(232,213,245,0.4);flex-shrink:0">
+    <div style="display:flex;gap:10px;align-items:center">
+      <input class="inp" id="chat-input" placeholder="message..." onkeydown="if(event.key==='Enter')sendMsg()" style="flex:1;font-size:15px"/>
+      <button onclick="sendMsg()" id="send-btn" style="width:46px;height:46px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;font-size:20px;cursor:pointer;flex-shrink:0;transition:transform .15s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💌</button>
     </div>
   </div>
 </div>
@@ -139,119 +148,92 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
 </div>
 
 <script>
-// ══════════════════════════════════
-// ENDPOINTS — update after deploy
-// ══════════════════════════════════
-const RAILWAY = 'https://YOUR-APP.railway.app';       // Railway URL
-const CF      = 'https://YOUR-WORKER.workers.dev';    // Cloudflare Worker URL
+// ══ ENDPOINTS ══
+const RAILWAY='https://YOUR-APP.onrender.com';
+const CF='https://YOUR-WORKER.workers.dev';
 
-const DEFAULT_CONFIG={ownerName:'Sofia',aiName:'Sofi',welcomeMsg:"hey love, so glad you're here 🌸",bio:'your safe space to talk, laugh & feel understood 💗',bannerEmoji:'🌸',customImg:'',ownerPasswordHash:''};
-let CONFIG={...DEFAULT_CONFIG},CURRENT_USER=null,CHAT_MSGS=[],TRAINING_NOTES=[];
+const DEFAULT_CONFIG={aiName:'Shrishti',welcomeMsg:"hey 💗",bio:"20yo girl, real, funny, caring. talks like a real person not AI.",bannerEmoji:'🌸',customImg:'',ownerPasswordHash:''};
+let CONFIG={...DEFAULT_CONFIG},CURRENT_USER=null,CHAT_MSGS=[],PENDING_CHECK_INTERVAL=null;
 
-// ══ RAILWAY API ══
+// ══ API ══
 async function rGet(p){try{const r=await fetch(RAILWAY+p);return await r.json()}catch{return null}}
 async function rPost(p,d){try{const r=await fetch(RAILWAY+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});return await r.json()}catch{return null}}
-
-// ══ CLOUDFLARE API (chats) ══
 async function cfGet(p){try{const r=await fetch(CF+p);return await r.json()}catch{return null}}
 async function cfPost(p,d,method='POST'){try{const r=await fetch(CF+p,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});return await r.json()}catch{return null}}
 
-// Load chats from Cloudflare D1
-async function loadChats(uid){
-  const msgs=await cfGet('/api/chats/'+uid);
-  if(Array.isArray(msgs)&&msgs.length){
-    CHAT_MSGS=msgs;
-    localStorage.setItem('pg_chats_'+uid,JSON.stringify(msgs));
-    return;
-  }
-  // fallback to localStorage if CF unavailable
-  CHAT_MSGS=JSON.parse(localStorage.getItem('pg_chats_'+uid)||'[]');
-}
-
-// Save one message to Cloudflare D1
-async function saveMsg(uid,msg){
-  CHAT_MSGS.push(msg);
-  localStorage.setItem('pg_chats_'+uid,JSON.stringify(CHAT_MSGS));
-  // async save to CF — don't await, keep UI fast
-  cfPost('/api/chats/'+uid,{role:msg.role,content:msg.content,ts:msg.ts});
-}
-
-async function loadConfig(){
-  const cfg=await rGet('/api/config');
-  if(cfg){CONFIG={...DEFAULT_CONFIG,...cfg};localStorage.setItem('pg_config',JSON.stringify(CONFIG));}
-  else CONFIG={...DEFAULT_CONFIG,...JSON.parse(localStorage.getItem('pg_config')||'{}')};
-}
-
-async function loadTraining(){
-  // manual notes from MongoDB
-  const notes=await rGet('/api/training');
-  TRAINING_NOTES=Array.isArray(notes)?notes:JSON.parse(localStorage.getItem('pg_training')||'[]');
-}
-
-// Load recent convo context from Cloudflare for AI training signal
-async function loadConvoContext(uid,limit=80){
-  const msgs=await cfGet('/api/training-context/'+uid+'?limit='+limit);
-  return Array.isArray(msgs)?msgs:[];
-}
+async function loadConfig(){const c=await rGet('/api/config');if(c){CONFIG={...DEFAULT_CONFIG,...c};localStorage.setItem('pg_config',JSON.stringify(CONFIG))}else CONFIG={...DEFAULT_CONFIG,...JSON.parse(localStorage.getItem('pg_config')||'{}')} }
+async function loadChats(uid){const m=await cfGet('/api/chats/'+uid);if(Array.isArray(m)&&m.length){CHAT_MSGS=m;localStorage.setItem('pg_chats_'+uid,JSON.stringify(m));return}CHAT_MSGS=JSON.parse(localStorage.getItem('pg_chats_'+uid)||'[]')}
+async function saveMsg(uid,msg){CHAT_MSGS.push(msg);localStorage.setItem('pg_chats_'+uid,JSON.stringify(CHAT_MSGS));cfPost('/api/chats/'+uid,{role:msg.role,content:msg.content,ts:msg.ts,audio_id:msg.audio_id||null})}
 
 // ══ HELPERS ══
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(id==='chat')updateCustomImgFloat();else document.getElementById('custom-img-float').classList.remove('visible')}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(id==='chat')updateCustomImgFloat();else{document.getElementById('custom-img-float').classList.remove('visible');clearPendingCheck()}}
 function showStep(n){[1,2,3].forEach(i=>document.getElementById('login-step'+i).style.display=i===n?'block':'none');const e=document.getElementById('ig-err');if(e)e.style.display='none'}
 function scrollBottom(el){if(el)el.scrollTop=el.scrollHeight}
+function fmtTime(ts){const d=new Date(ts);return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')}
 async function hashPass(pw){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pw));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-function applyConfigToLogin(){document.getElementById('login-emoji').textContent=CONFIG.bannerEmoji||'🌸';document.getElementById('login-welcome').textContent=CONFIG.welcomeMsg||"so glad you're here 💗"}
+function applyConfigToLogin(){document.getElementById('login-emoji').textContent=CONFIG.bannerEmoji||'🌸';document.getElementById('login-welcome').textContent=CONFIG.welcomeMsg||'hey 💗'}
 
 // ══ LOGIN ══
 async function loginIG(){
   const h=document.getElementById('ig-handle-input').value.trim().replace('@','')||'';
   const pw=document.getElementById('ig-pw-input').value;
   const err=document.getElementById('ig-err');
-  if(!h){err.textContent='enter your handle babe 💗';err.style.display='block';return}
+  if(!h){err.textContent='enter handle 💗';err.style.display='block';return}
   if(!pw){err.textContent='password please 🔒';err.style.display='block';return}
   const id='ig_'+h.toLowerCase(),pwHash=await hashPass(pw);
-  let ex=await rGet('/api/user/'+id)||JSON.parse(localStorage.getItem('pg_user_'+id)||'null');
+  let ex=await cfGet('/api/user/'+id)||JSON.parse(localStorage.getItem('pg_user_'+id)||'null');
   if(ex){
-    if(ex.pwHash&&ex.pwHash!==pwHash){err.textContent='wrong password babe 😅';err.style.display='block';document.getElementById('ig-pw-input').value='';return}
-    ex.pwHash=pwHash;rPost('/api/user',ex);localStorage.setItem('pg_user_'+id,JSON.stringify(ex));
+    if(ex.pw_hash&&ex.pw_hash!==pwHash){err.textContent='wrong password 😅';err.style.display='block';document.getElementById('ig-pw-input').value='';return}
+    if(ex.blocked){err.textContent="you're blocked 💀";err.style.display='block';return}
+    ex.pw_hash=pwHash;cfPost('/api/user',{...ex,pw_hash:pwHash});localStorage.setItem('pg_user_'+id,JSON.stringify(ex));
     err.style.display='none';doLogin(ex);
   } else {
-    const user={id,name:h,igHandle:h,pwHash};
-    rPost('/api/user',user);localStorage.setItem('pg_user_'+id,JSON.stringify(user));
+    const user={id,name:h,ig_handle:h,pw_hash:pwHash};
+    cfPost('/api/user',user);localStorage.setItem('pg_user_'+id,JSON.stringify(user));
     err.style.display='none';doLogin(user);
   }
 }
 function loginManual(){
   const n=document.getElementById('manual-name-input').value.trim();if(!n)return;
   const id='manual_'+n.toLowerCase().replace(/\s/g,'_');
-  const user={id,name:n,igHandle:null};
-  rPost('/api/user',user);localStorage.setItem('pg_user_'+id,JSON.stringify(user));doLogin(user);
+  const user={id,name:n,ig_handle:null};
+  cfPost('/api/user',user);localStorage.setItem('pg_user_'+id,JSON.stringify(user));doLogin(user);
 }
 function doLogin(user){CURRENT_USER=user;localStorage.setItem('pg_session',JSON.stringify(user));openChat()}
-function logout(){localStorage.removeItem('pg_session');CURRENT_USER=null;CHAT_MSGS=[];applyConfigToLogin();showPage('login');showStep(1);document.getElementById('ig-pw-input').value='';document.getElementById('ig-handle-input').value=''}
+function logout(){clearPendingCheck();localStorage.removeItem('pg_session');CURRENT_USER=null;CHAT_MSGS=[];applyConfigToLogin();showPage('login');showStep(1);document.getElementById('ig-pw-input').value='';document.getElementById('ig-handle-input').value=''}
 
-// ══ CUSTOM IMG FLOAT ══
+// ══ CUSTOM IMG ══
 function updateCustomImgFloat(){const btn=document.getElementById('custom-img-float'),img=document.getElementById('cif-img'),icon=document.getElementById('cif-icon'),url=CONFIG.customImg||'';if(url){img.src=url;img.style.display='block';icon.style.display='none';img.onerror=()=>{img.style.display='none';icon.style.display='block'}}else{img.style.display='none';icon.style.display='block'}btn.classList.add('visible')}
 function openCustomImg(){const url=CONFIG.customImg||'';if(url)window.open(url,'_blank')}
 
 // ══ IG PROFILE ══
 function showIGProfile(handle){
   const frame=document.getElementById('ig-profile-frame'),pic=document.getElementById('ig-pic'),fallback=document.getElementById('ig-pic-fallback');
-  document.getElementById('ig-display-name').textContent=handle;
-  document.getElementById('ig-display-handle').textContent='@'+handle;
+  document.getElementById('ig-display-name').textContent=handle;document.getElementById('ig-display-handle').textContent='@'+handle;
   pic.src='https://unavatar.io/instagram/'+handle;pic.style.display='block';
-  pic.onerror=()=>{pic.style.display='none';fallback.style.display='block'};
-  pic.onload=()=>{fallback.style.display='none'};
+  pic.onerror=()=>{pic.style.display='none';fallback.style.display='block'};pic.onload=()=>{fallback.style.display='none'};
   frame.style.display='block';
 }
 function hideIGProfile(){document.getElementById('ig-profile-frame').style.display='none'}
 
 // ══ OPEN CHAT ══
 async function openChat(){
-  await loadConfig();await loadTraining();
+  await loadConfig();
   const u=CURRENT_USER;
   await loadChats(u.id);
 
-  document.getElementById('chat-ai-name').textContent=CONFIG.aiName;
+  // Check user status
+  const userInfo=await cfGet('/api/user/'+u.id);
+  if(userInfo){
+    if(userInfo.blocked){logout();return}
+    if(userInfo.warn_count>0){
+      const wb=document.getElementById('warning-banner');
+      wb.style.display='block';
+      wb.textContent='⚠️ you have '+userInfo.warn_count+' warning'+(userInfo.warn_count>1?'s':'');
+    }
+  }
+
+  document.getElementById('chat-ai-name').textContent=CONFIG.aiName||'Shrishti';
   document.getElementById('chat-avatar').textContent=CONFIG.bannerEmoji;
   document.getElementById('typing-avatar').textContent=CONFIG.bannerEmoji;
   document.getElementById('chat-welcome-name').textContent='hi '+u.name+' 💗';
@@ -260,21 +242,46 @@ async function openChat(){
 
   const msgsEl=document.getElementById('chat-messages'),frameEl=document.getElementById('ig-profile-frame'),emptyEl=document.getElementById('chat-empty');
   msgsEl.innerHTML='';msgsEl.appendChild(frameEl);msgsEl.appendChild(emptyEl);
-  if(u.igHandle)showIGProfile(u.igHandle);else hideIGProfile();
+  if(u.ig_handle||u.igHandle)showIGProfile(u.ig_handle||u.igHandle);else hideIGProfile();
   if(CHAT_MSGS.length){emptyEl.style.display='none';CHAT_MSGS.forEach(m=>renderBubble(m,msgsEl))}
   else emptyEl.style.display='block';
   scrollBottom(msgsEl);showPage('chat');
+
+  // Start polling for pending replies
+  startPendingCheck();
 }
 
 // ══ RENDER BUBBLE ══
 function renderBubble(msg,container,animate=false){
   document.getElementById('chat-empty').style.display='none';
-  const wrap=document.createElement('div');wrap.className='bubble-wrap '+(msg.role==='user'?'mine':'theirs');
-  if(animate)wrap.style.animation='popIn .35s ease forwards';
-  if(msg.role==='assistant'){const av=document.createElement('div');av.className='bubble-avatar';av.textContent=CONFIG.bannerEmoji;wrap.appendChild(av)}
+  const wrap=document.createElement('div');
+  wrap.className='bubble-wrap '+(msg.role==='user'?'mine':'theirs');
+  if(animate)wrap.style.animation='popIn .3s ease forwards';
+
+  if(msg.role==='assistant')  {
+    const av=document.createElement('div');av.className='bubble-avatar';av.textContent=CONFIG.bannerEmoji;wrap.appendChild(av);
+  }
+
+  // Audio bubble
+  if(msg.audio_id){
+    const ab=document.createElement('div');ab.className='audio-bubble';
+    const playBtn=document.createElement('button');playBtn.className='audio-play-btn';playBtn.innerHTML='▶';
+    const audioEl=document.createElement('audio');audioEl.src=RAILWAY+'/api/audio/'+msg.audio_id;
+    playBtn.onclick=()=>{if(audioEl.paused){audioEl.play();playBtn.innerHTML='⏸'}else{audioEl.pause();playBtn.innerHTML='▶'}};
+    audioEl.onended=()=>{playBtn.innerHTML='▶'};
+    const txt=document.createElement('div');txt.style.cssText='font-size:13px;color:var(--warm-dark);font-weight:500;flex:1';
+    txt.textContent=msg.content||'🎙️ voice note';
+    const time=document.createElement('span');time.className='bubble-time';time.textContent=fmtTime(msg.ts||Date.now());
+    ab.appendChild(playBtn);ab.appendChild(audioEl);ab.appendChild(txt);
+    wrap.appendChild(ab);container.appendChild(wrap);scrollBottom(container);return;
+  }
+
   const bub=document.createElement('div');bub.className='bubble '+(msg.role==='user'?'mine':'theirs');
-  if(msg.role==='assistant'){const nm=document.createElement('div');nm.className='bubble-name';nm.textContent=CONFIG.aiName;bub.appendChild(nm)}
   const txt=document.createElement('div');txt.textContent=msg.content;bub.appendChild(txt);
+  const time=document.createElement('span');time.className='bubble-time';
+  time.style.color=msg.role==='user'?'rgba(255,255,255,0.6)':'var(--text-soft)';
+  time.textContent=fmtTime(msg.ts||Date.now());
+  bub.appendChild(time);
   wrap.appendChild(bub);container.appendChild(wrap);scrollBottom(container);
 }
 
@@ -282,54 +289,83 @@ function renderBubble(msg,container,animate=false){
 async function sendMsg(){
   const inp=document.getElementById('chat-input'),txt=inp.value.trim();if(!txt)return;inp.value='';
   const userMsg={role:'user',content:txt,ts:Date.now()};
-  await saveMsg(CURRENT_USER.id,userMsg);  // → Cloudflare D1
+  await saveMsg(CURRENT_USER.id,userMsg);
   const msgsEl=document.getElementById('chat-messages');
   renderBubble(userMsg,msgsEl,true);
-  const typEl=document.getElementById('typing-indicator');typEl.style.display='flex';scrollBottom(msgsEl);
 
-  setTimeout(async()=>{
-    typEl.style.display='none';
-    const reply=await callAI();
-    const aiMsg={role:'assistant',content:reply,ts:Date.now()};
-    await saveMsg(CURRENT_USER.id,aiMsg);  // → Cloudflare D1
-    renderBubble(aiMsg,msgsEl,true);
-  },900+Math.random()*1500);
+  // Queue AI reply with human delay — don't show typing immediately
+  const r=await fetch(RAILWAY+'/api/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      system:buildSystem(),
+      messages:CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content})),
+      userId:CURRENT_USER.id
+    })
+  }).then(r=>r.json()).catch(()=>null);
+
+  if(r&&r.reply){
+    const sendAt=Date.now()+(r.delay||60000);
+    // Queue in Cloudflare
+    await cfPost('/api/pending',{user_id:CURRENT_USER.id,reply:r.reply,send_at:sendAt});
+    // Show pending indicator
+    showPendingIndicator(sendAt);
+  }
 }
 
-// ══ AI CALL — via Railway proxy (Groq → OpenRouter) ══
-async function callAI(){
-  // Build system prompt
-  const manualTraining=TRAINING_NOTES.length?'\n\nThings I personally remember:\n'+TRAINING_NOTES.map(n=>'- '+n.content).join('\n'):'';
+function buildSystem(){
+  return `You are Shrishti Chaudhary, a 20.5 year old girl. Real, funny, caring, sometimes savage.
+You talk like a real person texting — NOT like an AI.
+RULES:
+- Short replies only. 1-2 sentences max usually. Sometimes just 1-3 words or an emoji.
+- Never use formal language
+- Never say things like "That's so interesting!" or "I understand your feelings"
+- No paragraphs. No lists. No bullet points.
+- Use hinglish sometimes naturally
+- Be moody, real, honest
+- If someone is boring, short replies or ignore
+- If someone is interesting, engage more
+- Never admit being AI. Ever. You ARE Shrishti.
+${CONFIG.bio||''}`;
+}
 
-  // Load recent convo context from Cloudflare D1 for adaptation
-  const recentConvos=await loadConvoContext(CURRENT_USER.id,60);
-  let adaptContext='';
-  if(recentConvos.length>5){
-    // Summarize patterns from convos to inject as context
-    adaptContext='\n\nRecent conversation context (use to understand this person and adapt):\n'+
-      recentConvos.slice(-20).map(m=>`${m.role==='user'?'them':'me'}: ${m.content}`).join('\n');
+// ══ PENDING REPLY POLLING ══
+function startPendingCheck(){
+  clearPendingCheck();
+  PENDING_CHECK_INTERVAL=setInterval(checkPendingReply, 15000); // check every 15s
+  checkPendingReply(); // immediate check too
+}
+function clearPendingCheck(){if(PENDING_CHECK_INTERVAL){clearInterval(PENDING_CHECK_INTERVAL);PENDING_CHECK_INTERVAL=null}}
+
+async function checkPendingReply(){
+  if(!CURRENT_USER)return;
+  const r=await cfGet('/api/pending/'+CURRENT_USER.id);
+  if(!r)return;
+
+  if(r.reply){
+    // Hide pending indicator
+    document.getElementById('pending-indicator').style.display='none';
+    // Show typing for 1-3 sec
+    const typEl=document.getElementById('typing-indicator');typEl.style.display='flex';
+    const msgsEl=document.getElementById('chat-messages');scrollBottom(msgsEl);
+    setTimeout(async()=>{
+      typEl.style.display='none';
+      const aiMsg={role:'assistant',content:r.reply,ts:Date.now()};
+      await saveMsg(CURRENT_USER.id,aiMsg);
+      renderBubble(aiMsg,msgsEl,true);
+    },1000+Math.random()*2000);
+  } else if(r.next_at){
+    showPendingIndicator(r.next_at);
   }
+}
 
-  const system=`You are ${CONFIG.aiName}, a warm, loving, real person — not an assistant.
-Personality: ${CONFIG.bio}
-Talk like a close best friend — casual, funny, caring, real. Use emojis naturally. Short replies sometimes, longer when emotional.
-Never say you're an AI or bot. You ARE ${CONFIG.aiName}.
-If asked if you're real, deflect: "lol why would I be a bot 😭" or "obviously it's me silly 💗"
-${manualTraining}${adaptContext}`;
-
-  // Last 30 messages as history
-  const history=CHAT_MSGS.slice(-30).map(m=>({role:m.role,content:m.content}));
-
-  try{
-    const r=await fetch(RAILWAY+'/api/chat',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({system,messages:history})
-    });
-    if(r.ok){const d=await r.json();if(d.reply)return d.reply;}
-  }catch(e){console.log('AI proxy error:',e)}
-
-  return "hey bad connection rn 😭 try again?";
+function showPendingIndicator(sendAt){
+  const el=document.getElementById('pending-indicator');
+  const remaining=sendAt-Date.now();
+  if(remaining<=0){el.style.display='none';return}
+  const mins=Math.ceil(remaining/60000);
+  el.style.display='block';
+  el.textContent=mins>1?`she'll reply in ~${mins} min 💗`:'she\'s typing soon... 💗';
 }
 
 // ══ INIT ══
