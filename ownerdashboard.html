@@ -192,7 +192,6 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
 <script>
 const RAILWAY='https://letschat-production-65ab.up.railway.app';
 const CF='https://shrill-bird-59e1.shrishtibatman.workers.dev';
-const OPENROUTER_KEY='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';
 
 const DEFAULT_CONFIG={aiName:'Shrishti',welcomeMsg:"hey 💗",bio:"20yo girl, real, funny, caring. talks like a real person.",bannerEmoji:'🌸',customImg:'',ownerPasswordHash:''};
 let CONFIG={...DEFAULT_CONFIG},TRAINING_NOTES=[],CLONE_MSGS=[];
@@ -436,17 +435,15 @@ ${trainingText}`;
     document.getElementById('clone-typing').style.display='none';
     let reply='...';
     try{
-      const fullMsgs=[{role:'system',content:system},...CLONE_MSGS.map(m=>({role:m.role,content:m.content}))];
-      const aiRes=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+      const aiRes=await fetch(CF+'/api/chat',{
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+OPENROUTER_KEY},
-        body:JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct',messages:fullMsgs,max_tokens:120,temperature:0.95})
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({system,messages:CLONE_MSGS.map(m=>({role:m.role,content:m.content})),userId:'owner_clone'})
       });
-      const aiData=await aiRes.json();
-      const raw=aiData.choices?.[0]?.message?.content;
-      if(raw)reply=raw.replace(/^(sure!?|of course!?|absolutely!?|certainly!?|great!?|wow!?)\s*/gi,'').replace(/\bas an ai\b.*?[.!]/gi,'').replace(/\bi('m| am) (an? )?(ai|language model|chatbot|assistant)\b.*?[.!]/gi,'').replace(/\bi (can't|cannot) (actually )?/gi,"i don't ").trim();
-      else alert('OpenRouter response: '+JSON.stringify(aiData).slice(0,300));
-    }catch(e){alert('OpenRouter error: '+e.message);}
+      const r=await aiRes.json();
+      if(r.reply)reply=r.reply;
+      else alert('AI error: '+JSON.stringify(r));
+    }catch(e){alert('AI error: '+e.message);}
     const aiMsg={role:'assistant',content:reply};CLONE_MSGS.push(aiMsg);renderCloneBubble(aiMsg,true);
 
     // Auto-save clone chat insights as training notes
