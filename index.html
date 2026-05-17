@@ -143,8 +143,15 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
   </div>
 </div>
 
-<div id="custom-img-float" onclick="openCustomImg()">
-  <img id="cif-img" src="" alt=""/><span id="cif-icon">🖼️</span>
+<div style="position:fixed;bottom:84px;left:16px;z-index:1000;display:none;flex-direction:column;align-items:center;gap:4px" id="float-wrapper">
+  <div id="float-last-seen" style="background:rgba(0,0,0,0.55);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(8px);display:none"></div>
+  <div style="position:relative;cursor:pointer" onclick="openCustomImg()">
+    <div id="custom-img-float" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--plum));display:flex;align-items:center;justify-content:center;box-shadow:0 5px 20px rgba(242,104,122,0.4);overflow:hidden;border:3px solid rgba(255,255,255,0.85)">
+      <img id="cif-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none"/>
+      <span id="cif-icon">🖼️</span>
+    </div>
+    <div id="float-status-dot" style="position:absolute;bottom:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#aaa;border:2px solid #fff;transition:background .3s"></div>
+  </div>
 </div>
 
 <script>
@@ -166,7 +173,7 @@ async function loadChats(uid){const m=await cfGet('/api/chats/'+uid);if(Array.is
 async function saveMsg(uid,msg){CHAT_MSGS.push(msg);localStorage.setItem('pg_chats_'+uid,JSON.stringify(CHAT_MSGS));cfPost('/api/chats/'+uid,{role:msg.role,content:msg.content,ts:msg.ts,audio_id:msg.audio_id||null})}
 
 // ══ HELPERS ══
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(id==='chat')updateCustomImgFloat();else{document.getElementById('custom-img-float').classList.remove('visible');clearPendingCheck()}}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(id==='chat')updateCustomImgFloat();else{document.getElementById('float-wrapper').style.display='none';clearPendingCheck()}}
 function showStep(n){[1,2,3].forEach(i=>document.getElementById('login-step'+i).style.display=i===n?'block':'none');const e=document.getElementById('ig-err');if(e)e.style.display='none'}
 function scrollBottom(el){if(el)el.scrollTop=el.scrollHeight}
 function fmtTime(ts){const d=new Date(ts);return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')}
@@ -203,7 +210,7 @@ function doLogin(user){CURRENT_USER=user;localStorage.setItem('pg_session',JSON.
 function logout(){stopHeartbeat();clearPendingCheck();localStorage.removeItem('pg_session');CURRENT_USER=null;CHAT_MSGS=[];applyConfigToLogin();showPage('login');showStep(1);document.getElementById('ig-pw-input').value='';document.getElementById('ig-handle-input').value=''}
 
 // ══ CUSTOM IMG ══
-function updateCustomImgFloat(){const btn=document.getElementById('custom-img-float'),img=document.getElementById('cif-img'),icon=document.getElementById('cif-icon'),url=CONFIG.customImg||'';if(url){img.src=url;img.style.display='block';icon.style.display='none';img.onerror=()=>{img.style.display='none';icon.style.display='block'}}else{img.style.display='none';icon.style.display='block'}btn.classList.add('visible')}
+function updateCustomImgFloat(){const wrapper=document.getElementById('float-wrapper'),img=document.getElementById('cif-img'),icon=document.getElementById('cif-icon'),url=CONFIG.customImg||'';if(url){img.src=url;img.style.display='block';icon.style.display='none';img.onerror=()=>{img.style.display='none';icon.style.display='block'}}else{img.style.display='none';icon.style.display='block'}wrapper.style.display='flex'}
 function openCustomImg(){const url=CONFIG.customImg||'';if(url)window.open(url,'_blank')}
 
 // ══ IG PROFILE ══
@@ -355,13 +362,40 @@ ${CONFIG.bio||''}`;
 // ══ HER STATUS DISPLAY ══
 function updateHerStatusDisplay(herState){
   const chatStatus=document.getElementById('chat-status');
-  if(!chatStatus)return;
-  if(!herState){chatStatus.innerHTML='💗';return;}
-  if(herState.status==='online') chatStatus.innerHTML='<span style="color:#2d8b5a;font-weight:700">🟢 online</span>';
-  else if(herState.status==='away') chatStatus.innerHTML='<span style="color:#b8860b;font-weight:700">🟡 away</span>';
-  else{
-    const doing=herState.doing_now||'';
-    chatStatus.innerHTML=doing?`<span style="color:var(--text-soft)">${doing}</span>`:'💗';
+  const dot=document.getElementById('float-status-dot');
+  const floatLabel=document.getElementById('float-last-seen');
+
+  if(!herState){
+    if(chatStatus)chatStatus.innerHTML='💗';
+    if(dot)dot.style.background='#aaa';
+    if(floatLabel)floatLabel.style.display='none';
+    return;
+  }
+
+  if(herState.status==='online'){
+    if(chatStatus)chatStatus.innerHTML='<span style="color:#2d8b5a;font-weight:800;font-size:11px">● online</span>';
+    if(dot){dot.style.background='#2d8b5a';}
+    if(floatLabel){floatLabel.textContent='online';floatLabel.style.display='block';floatLabel.style.background='rgba(45,139,90,0.85)';}
+  } else if(herState.status==='away'){
+    if(chatStatus)chatStatus.innerHTML='<span style="color:#c09000;font-weight:700;font-size:11px">● away</span>';
+    if(dot){dot.style.background='#f0c030';}
+    if(floatLabel){floatLabel.textContent='away';floatLabel.style.display='block';floatLabel.style.background='rgba(180,140,0,0.8)';}
+  } else {
+    const ts=herState.last_updated;
+    let seen='last seen recently';
+    if(ts){
+      const diff=Date.now()-ts;
+      const m=Math.floor(diff/60000);
+      const h=Math.floor(diff/3600000);
+      const d=Math.floor(diff/86400000);
+      if(diff<60000)seen='last seen just now';
+      else if(m<60)seen=`last seen ${m}m ago`;
+      else if(h<24)seen=`last seen ${h}h ago`;
+      else seen=`last seen ${d}d ago`;
+    }
+    if(chatStatus)chatStatus.innerHTML=`<span style="color:var(--text-soft);font-size:11px">${seen}</span>`;
+    if(dot){dot.style.background='#bbb';}
+    if(floatLabel){floatLabel.textContent=seen;floatLabel.style.display='block';floatLabel.style.background='rgba(0,0,0,0.55)';}
   }
 }
 
