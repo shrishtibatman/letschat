@@ -466,18 +466,24 @@ async function loadInbox(){
     document.getElementById('inbox-user-list').innerHTML='<p style="font-size:12px;color:var(--text-soft);text-align:center;padding:20px 0">no users yet</p>';
     return;
   }
-  document.getElementById('inbox-user-list').innerHTML=users.map(u=>{
+  const inboxList = document.getElementById('inbox-user-list');
+  inboxList.innerHTML=users.map(u=>{
     const online=u.is_online?'🟢 ':'';
     const lastSeen=fmtLastSeen(u.last_seen);
-    return `<div onclick="openInboxUser(${JSON.stringify(JSON.stringify(u))})" id="inbox-user-${u.id}" style="padding:10px 10px;border-radius:12px;background:var(--blush);cursor:pointer;transition:all .2s;border:2px solid transparent" onmouseover="this.style.borderColor='var(--rose-soft)'" onmouseout="this.style.borderColor='transparent'">
+    return `<div data-uid="${u.id}" id="inbox-user-${u.id}" style="padding:10px 10px;border-radius:12px;background:var(--blush);cursor:pointer;transition:all .2s;border:2px solid transparent">
       <div style="font-size:12px;font-weight:800;color:var(--warm-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${online}${u.name||u.id}</div>
       <div style="font-size:10px;color:var(--text-soft);margin-top:2px">${u.is_online?'<span style="color:#2d8b5a">online</span>':lastSeen}</div>
     </div>`;
   }).join('');
+  // store users map and attach click handlers
+  window._INBOX_USERS = {};
+  users.forEach(u => { window._INBOX_USERS[u.id] = u; });
+  inboxList.querySelectorAll('[data-uid]').forEach(el => {
+    el.addEventListener('click', () => openInboxUser(window._INBOX_USERS[el.dataset.uid]));
+  });
 }
 
-async function openInboxUser(uJson){
-  const u=JSON.parse(uJson);
+async function openInboxUser(u){
   INBOX_USER=u;
 
   // highlight selected
