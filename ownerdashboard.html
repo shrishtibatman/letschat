@@ -600,9 +600,17 @@ function updateStateUI(state){
 }
 
 async function setMood(mood){
-  await cfPost('/api/herstate',{mood});
-  CURRENT_HER_STATE.mood=mood;
-  updateStateUI(CURRENT_HER_STATE);
+  // save mood but do NOT lock — auto-brain can still override
+  const res=await cfPost('/api/herstate',{mood,mood_locked:0});
+  if(res&&res.ok){
+    CURRENT_HER_STATE.mood=mood;
+    CURRENT_HER_STATE.mood_locked=0;
+    document.getElementById('mood-lock-toggle').checked=false;
+    document.getElementById('state-lock-info').textContent='🔄 mood set — auto-brain can still shift it';
+    updateStateUI(CURRENT_HER_STATE);
+  } else {
+    alert('save failed — CF worker issue 😭');
+  }
 }
 
 async function setStatus(status){
