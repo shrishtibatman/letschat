@@ -204,6 +204,20 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
         <label style="font-size:11px;font-weight:800;color:var(--text-soft);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">custom image link 🖼️</label>
         <input class="inp" id="field-customImg" placeholder="https://..."/>
       </div>
+
+      <!-- PROFILE BIO -->
+      <div style="margin-bottom:18px">
+        <label style="font-size:11px;font-weight:800;color:var(--text-soft);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">profile bio (shown on profile card) 💌</label>
+        <textarea class="inp" id="field-profileBio" placeholder="something about her shown on the profile card..." style="resize:vertical;min-height:64px"></textarea>
+      </div>
+
+      <!-- PROFILE PICTURES -->
+      <div style="margin-bottom:20px;padding:18px;background:rgba(242,104,122,0.06);border-radius:14px;border:1px solid rgba(232,213,245,0.5)">
+        <label style="font-size:11px;font-weight:800;color:var(--text-soft);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">profile pictures 📸</label>
+        <p style="font-size:12px;color:var(--text-soft);margin-bottom:12px">paste image URLs — shown in her profile card. first one = main pic & header button.</p>
+        <div id="profile-pics-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px"></div>
+        <button class="btn-ghost" onclick="addProfilePicField()" style="width:100%;font-size:12px">+ add photo URL</button>
+      </div>
       <div style="margin-bottom:20px;padding:18px;background:rgba(155,95,191,0.07);border-radius:14px;border:1px solid rgba(232,213,245,0.5)">
         <label style="font-size:11px;font-weight:800;color:var(--text-soft);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">change password 🔐</label>
         <input class="inp" type="password" id="field-new-pass" placeholder="new password..." style="margin-bottom:9px"/>
@@ -290,7 +304,7 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
 const RAILWAY='https://letschat-production-65ab.up.railway.app';
 const CF='https://shrill-bird-59e1.shrishtibatman.workers.dev';
 
-const DEFAULT_CONFIG={aiName:'Shrishti',welcomeMsg:"hey 💗",bio:"20yo girl, real, funny, caring. talks like a real person.",bannerEmoji:'🌸',customImg:'',ownerPasswordHash:''};
+const DEFAULT_CONFIG={aiName:'Shrishti',welcomeMsg:"hey 💗",bio:"20yo girl, real, funny, caring. talks like a real person.",bannerEmoji:'🌸',customImg:'',profilePics:[],profileBio:'',ownerPasswordHash:''};
 let CONFIG={...DEFAULT_CONFIG},TRAINING_NOTES=[],CLONE_MSGS=[];
 
 async function rGet(p){try{const r=await fetch(RAILWAY+p);return await r.json()}catch{return null}}
@@ -357,10 +371,41 @@ const CFIELDS=[{label:'ai name',key:'aiName',placeholder:'Shrishti'},{label:'wel
 function buildCustomizeFields(){
   document.getElementById('customize-fields').innerHTML=CFIELDS.map(f=>`<div style="margin-bottom:16px"><label style="font-size:11px;font-weight:800;color:var(--text-soft);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px">${f.label}</label><input class="inp" id="field-${f.key}" value="${CONFIG[f.key]||''}" placeholder="${f.placeholder}"/></div>`).join('');
   document.getElementById('field-customImg').value=CONFIG.customImg||'';
+  document.getElementById('field-profileBio').value=CONFIG.profileBio||'';
+  renderProfilePicFields();
 }
+
+// ══ PROFILE PICTURES ══
+function renderProfilePicFields(){
+  const pics=CONFIG.profilePics||[];
+  const container=document.getElementById('profile-pics-list');
+  if(!container)return;
+  if(!pics.length){container.innerHTML='<p style="font-size:12px;color:var(--text-soft);text-align:center;padding:8px">no photos yet — add one below</p>';return;}
+  container.innerHTML=pics.map((url,i)=>`
+    <div style="display:flex;gap:8px;align-items:center" id="ppic-row-${i}">
+      <div style="width:40px;height:40px;border-radius:10px;overflow:hidden;background:var(--blush);flex-shrink:0">
+        <img src="${url}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>
+      </div>
+      <input class="inp" value="${url}" oninput="updateProfilePic(${i},this.value)" style="flex:1;font-size:12px;padding:9px 12px" placeholder="https://..."/>
+      <button onclick="removeProfilePic(${i})" style="background:none;border:none;color:var(--rose);font-size:18px;cursor:pointer;flex-shrink:0">×</button>
+    </div>`).join('');
+}
+function addProfilePicField(){
+  if(!(CONFIG.profilePics))CONFIG.profilePics=[];
+  CONFIG.profilePics.push('');
+  renderProfilePicFields();
+  // focus last input
+  setTimeout(()=>{const inputs=document.querySelectorAll('#profile-pics-list input');if(inputs.length)inputs[inputs.length-1].focus();},50);
+}
+function updateProfilePic(i,val){if(CONFIG.profilePics)CONFIG.profilePics[i]=val.trim();}
+function removeProfilePic(i){CONFIG.profilePics.splice(i,1);renderProfilePicFields();}
+
 async function saveConfig(){
   CFIELDS.forEach(f=>{const el=document.getElementById('field-'+f.key);if(el)CONFIG[f.key]=el.value.trim()});
   const ci=document.getElementById('field-customImg');if(ci)CONFIG.customImg=ci.value.trim();
+  const pb=document.getElementById('field-profileBio');if(pb)CONFIG.profileBio=pb.value.trim();
+  // collect profile pics (filter empty)
+  CONFIG.profilePics=(CONFIG.profilePics||[]).filter(u=>u.trim());
   const np=document.getElementById('field-new-pass').value,cp=document.getElementById('field-confirm-pass').value,pmsg=document.getElementById('pass-msg');
   if(np||cp){
     if(np!==cp){pmsg.style.display='block';pmsg.style.color='var(--rose)';pmsg.textContent="don't match 😅";return}
