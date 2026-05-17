@@ -236,11 +236,11 @@ async function openChat(){
   // Fetch her state — show status + last seen in chat header
   const herState=await cfGet('/api/herstate').catch(()=>null);
   updateHerStatusDisplay(herState);
-  // refresh status every 60s
+  // refresh status every 30s
   setInterval(async()=>{
     const s=await cfGet('/api/herstate').catch(()=>null);
     updateHerStatusDisplay(s);
-  },60000);
+  },30000);
 
   document.getElementById('chat-ai-name').textContent=CONFIG.aiName||'Shrishti';
   document.getElementById('chat-avatar').textContent=CONFIG.bannerEmoji;
@@ -298,6 +298,9 @@ function renderBubble(msg,container,animate=false){
 }
 
 // ══ SEND MESSAGE ══
+// ══ MESSAGE BATCHING — wait 8s for burst messages, then one reply ══
+let MSG_BATCH_TIMER=null;
+
 async function sendMsg(){
   const inp=document.getElementById('chat-input'),txt=inp.value.trim();if(!txt)return;inp.value='';
   const userMsg={role:'user',content:txt,ts:Date.now()};
@@ -305,24 +308,30 @@ async function sendMsg(){
   const msgsEl=document.getElementById('chat-messages');
   renderBubble(userMsg,msgsEl,true);
 
-  // Queue AI reply via CF Worker (key stored securely in CF env)
+  // Cancel any pending AI call — wait for more messages
+  if(MSG_BATCH_TIMER)clearTimeout(MSG_BATCH_TIMER);
+
+  // Wait 8s — if no more messages come, fire AI
+  MSG_BATCH_TIMER=setTimeout(()=>processAIReply(),8000);
+}
+
+async function processAIReply(){
+  MSG_BATCH_TIMER=null;
   let r=null;
   try{
     const sysPrompt=buildSystem();
     const aiRes=await fetch(CF+'/api/chat',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({system:sysPrompt,messages:CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content})),userId:CURRENT_USER.id})
+      body:JSON.stringify({system:sysPrompt,messages:CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content,ts:m.ts||0})),userId:CURRENT_USER.id})
     });
     r=await aiRes.json();
-    if(r.error) alert('AI error: '+JSON.stringify(r));
+    if(r&&r.error&&!r.paused)alert('AI error: '+JSON.stringify(r));
   }catch(e){alert('AI error: '+e.message);}
 
   if(r&&r.reply){
-    const sendAt=Date.now()+(r.delay||60000);
-    // Queue in Cloudflare
+    const sendAt=Date.now()+(r.delay!=null?r.delay:2*60*1000);
     await cfPost('/api/pending',{user_id:CURRENT_USER.id,reply:r.reply,send_at:sendAt});
-    // Show pending indicator
     showPendingIndicator(sendAt);
   }
 }
@@ -347,13 +356,12 @@ ${CONFIG.bio||''}`;
 function updateHerStatusDisplay(herState){
   const chatStatus=document.getElementById('chat-status');
   if(!chatStatus)return;
-  if(!herState){chatStatus.textContent='💗';return;}
-  if(herState.status==='online') chatStatus.textContent='🟢 online now';
-  else if(herState.status==='away') chatStatus.textContent='🟡 away';
+  if(!herState){chatStatus.innerHTML='💗';return;}
+  if(herState.status==='online') chatStatus.innerHTML='<span style="color:#2d8b5a;font-weight:700">🟢 online</span>';
+  else if(herState.status==='away') chatStatus.innerHTML='<span style="color:#b8860b;font-weight:700">🟡 away</span>';
   else{
-    // show doing_now as last seen context
     const doing=herState.doing_now||'';
-    chatStatus.textContent=doing?doing:'💗';
+    chatStatus.innerHTML=doing?`<span style="color:var(--text-soft)">${doing}</span>`:'💗';
   }
 }
 
