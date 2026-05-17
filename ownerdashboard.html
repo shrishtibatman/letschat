@@ -600,8 +600,11 @@ function updateStateUI(state){
 }
 
 async function setMood(mood){
-  await cfPost('/api/herstate',{mood});
+  await cfPost('/api/herstate',{mood,mood_locked:1});
   CURRENT_HER_STATE.mood=mood;
+  CURRENT_HER_STATE.mood_locked=1;
+  document.getElementById('mood-lock-toggle').checked=true;
+  document.getElementById('state-lock-info').textContent='🔒 mood locked by you';
   updateStateUI(CURRENT_HER_STATE);
 }
 
