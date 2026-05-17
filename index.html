@@ -150,7 +150,7 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
       <img id="cif-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none"/>
       <span id="cif-icon">🖼️</span>
     </div>
-    <div id="float-status-dot" style="position:absolute;bottom:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#aaa;border:2px solid #fff;transition:background .3s"></div>
+    <div id="float-status-dot" style="position:absolute;bottom:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#aaa;border:2px solid #fff;transition:background .3s"></div>
   </div>
 </div>
 
@@ -333,14 +333,20 @@ async function processAIReply(){
       body:JSON.stringify({system:sysPrompt,messages:CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content,ts:m.ts||0})),userId:CURRENT_USER.id})
     });
     r=await aiRes.json();
-    if(r&&r.error&&!r.paused)alert('AI error: '+JSON.stringify(r));
+    if(r&&r.error&&!r.paused&&!r.ghosted)alert('AI error: '+JSON.stringify(r));
   }catch(e){alert('AI error: '+e.message);}
 
   if(r&&r.reply){
-    const sendAt=Date.now()+(r.delay!=null?r.delay:2*60*1000);
-    await cfPost('/api/pending',{user_id:CURRENT_USER.id,reply:r.reply,send_at:sendAt});
-    showPendingIndicator(sendAt);
+    const baseDelay=r.delay!=null?r.delay:2*60*1000;
+    const parts=r.parts&&r.parts.length>1?r.parts:[r.reply];
+    // stagger multiple parts with small gaps between them
+    for(let i=0;i<parts.length;i++){
+      const sendAt=Date.now()+baseDelay+(i*2500);
+      await cfPost('/api/pending',{user_id:CURRENT_USER.id,reply:parts[i],send_at:sendAt});
+    }
+    showPendingIndicator(Date.now()+baseDelay);
   }
+  // ghosted — silently do nothing, no indicator
 }
 
 function buildSystem(){
