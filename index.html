@@ -50,7 +50,6 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
 #ig-display-handle{font-size:12px;color:var(--text-soft);font-weight:600}
 
 /* pending reply indicator */
-#pending-indicator{display:none;padding:8px 16px;font-size:12px;color:var(--text-soft);font-weight:600;text-align:center;font-style:italic}
 
 /* warning banner */
 #warning-banner{display:none;padding:10px 16px;background:rgba(242,104,122,0.1);border-bottom:1px solid rgba(242,104,122,0.2);font-size:13px;color:var(--rose);font-weight:700;text-align:center}
@@ -126,7 +125,6 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
     </div>
   </div>
 
-  <div id="pending-indicator">she'll reply soon... 💗</div>
 
   <div id="typing-indicator" style="display:none;padding:0 15px 6px;align-items:flex-end;gap:8px">
     <div id="typing-avatar" style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lilac-mid));display:flex;align-items:center;justify-content:center;font-size:14px">🌸</div>
@@ -143,7 +141,7 @@ html,body{height:100%;font-family:'Nunito',sans-serif;background:var(--cream);co
   </div>
 </div>
 
-<div style="position:fixed;bottom:84px;left:16px;z-index:1000;display:none;flex-direction:column;align-items:center;gap:4px" id="float-wrapper">
+<div style="position:fixed;bottom:115px;left:16px;z-index:1000;display:none;flex-direction:column;align-items:center;gap:4px" id="float-wrapper">
   <div id="float-last-seen" style="background:rgba(0,0,0,0.55);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(8px);display:none"></div>
   <div style="position:relative;cursor:pointer" onclick="openCustomImg()">
     <div id="custom-img-float" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--plum));display:flex;align-items:center;justify-content:center;box-shadow:0 5px 20px rgba(242,104,122,0.4);overflow:hidden;border:3px solid rgba(255,255,255,0.85)">
@@ -333,8 +331,7 @@ async function processAIReply(){
       body:JSON.stringify({system:sysPrompt,messages:CHAT_MSGS.slice(-20).map(m=>({role:m.role,content:m.content,ts:m.ts||0})),userId:CURRENT_USER.id})
     });
     r=await aiRes.json();
-    if(r&&r.error&&!r.paused&&!r.ghosted)alert('AI error: '+JSON.stringify(r));
-  }catch(e){alert('AI error: '+e.message);}
+  }catch(e){console.error('AI error',e);}
 
   if(r&&r.reply){
     const baseDelay=r.delay!=null?r.delay:2*60*1000;
@@ -344,7 +341,6 @@ async function processAIReply(){
       const sendAt=Date.now()+baseDelay+(i*2500);
       await cfPost('/api/pending',{user_id:CURRENT_USER.id,reply:parts[i],send_at:sendAt});
     }
-    showPendingIndicator(Date.now()+baseDelay);
   }
   // ghosted — silently do nothing, no indicator
 }
@@ -438,8 +434,6 @@ async function checkPendingReply(){
   if(!r)return;
 
   if(r.reply){
-    // Hide pending indicator
-    document.getElementById('pending-indicator').style.display='none';
     // Show typing for 1-3 sec
     const typEl=document.getElementById('typing-indicator');typEl.style.display='flex';
     const msgsEl=document.getElementById('chat-messages');scrollBottom(msgsEl);
@@ -449,19 +443,9 @@ async function checkPendingReply(){
       await saveMsg(CURRENT_USER.id,aiMsg);
       renderBubble(aiMsg,msgsEl,true);
     },1000+Math.random()*2000);
-  } else if(r.next_at){
-    showPendingIndicator(r.next_at);
   }
 }
 
-function showPendingIndicator(sendAt){
-  const el=document.getElementById('pending-indicator');
-  const remaining=sendAt-Date.now();
-  if(remaining<=0){el.style.display='none';return}
-  const mins=Math.ceil(remaining/60000);
-  el.style.display='block';
-  el.textContent=mins>1?`she'll reply in ~${mins} min 💗`:'she\'s typing soon... 💗';
-}
 
 // ══ INIT ══
 (async function init(){
